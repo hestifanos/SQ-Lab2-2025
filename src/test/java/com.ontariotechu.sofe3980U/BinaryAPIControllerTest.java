@@ -35,9 +35,9 @@ public class BinaryAPIControllerTest {
    
     @Test
     public void add() throws Exception {
-        this.mvc.perform(get("/add").param("operand1","111").param("operand2","1010"))//.andDo(print())
+        this.mvc.perform(get("/add").param("operand1","011").param("operand2","010"))//.andDo(print())
             .andExpect(status().isOk())
-            .andExpect(content().string("10001"));
+            .andExpect(content().string("110"));
     }
 	@Test
     public void add2() throws Exception {
