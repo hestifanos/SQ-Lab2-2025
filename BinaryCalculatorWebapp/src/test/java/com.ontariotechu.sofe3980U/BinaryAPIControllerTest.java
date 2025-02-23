@@ -35,9 +35,9 @@ public class BinaryAPIControllerTest {
    
     @Test
     public void add() throws Exception {
-        this.mvc.perform(get("/add").param("operand1","111").param("operand2","1010"))//.andDo(print())
+        this.mvc.perform(get("/add").param("operand1","011").param("operand2","010"))//.andDo(print())
             .andExpect(status().isOk())
-            .andExpect(content().string("10001"));
+            .andExpect(content().string("110"));
     }
 	@Test
     public void add2() throws Exception {
@@ -48,4 +48,33 @@ public class BinaryAPIControllerTest {
 			.andExpect(MockMvcResultMatchers.jsonPath("$.result").value(10001))
 			.andExpect(MockMvcResultMatchers.jsonPath("$.operator").value("add"));
     }
+
+    @Test
+    public void subtract() throws Exception {
+        this.mvc.perform(get("/subtract").param("operand1","1010").param("operand2","0011"))//.andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(content().string("111"));
+    }
+
+    @Test
+    public void subtract_json() throws Exception {
+        this.mvc.perform(get("/subtract_json").param("operand1","1010").param("operand2","0011"))//.andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(MockMvcResultMatchers.jsonPath("$.operand1").value(1010))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.operand2").value(11))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.result").value(111))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.operator").value("subtract"));
+    }
+
+    @Test
+    public void multiply() throws Exception {
+        this.mvc.perform(get("/multiply").param("operand1","1010").param("operand2","0011"))//.andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(content().string("11110"));
+    }
+    
+
+
+
+
 }
